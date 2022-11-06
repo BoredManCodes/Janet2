@@ -14,4 +14,5 @@ async def on_ready():
 
 bot.load_extension(name="extensions.reminders")
 bot.load_extension(name="extensions.tasks")
+bot.load_extension(name="extensions.config")
 bot.start(os.getenv("DISCORD_TOKEN"))

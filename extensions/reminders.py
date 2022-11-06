@@ -45,7 +45,6 @@ class Reminders(Extension):
     @listen()
     async def on_ready(self):
         self.check_reminders.start()
-        # We will worry later about actually reminding
 
     @slash_command(
         name="reminders",
@@ -79,7 +78,7 @@ class Reminders(Extension):
             mongoConnectionString, serverSelectionTimeoutMS=5000
         )
         db = client.reminders
-        # now we can wait for the modal
+        # * now we can wait for the modal
         try:
             modal_response = await self.bot.wait_for_modal(modal, timeout=500)
             try:
@@ -129,7 +128,7 @@ class Reminders(Extension):
                 description=f"I'll remind you {when_absolute}({when_relative})\nAbout: {what}",
             )
             await modal_response.send(embeds=embed)
-        except asyncio.TimeoutError:  # since we have a timeout, we can assume the user closed the modal
+        except asyncio.TimeoutError:  # ! since we have a timeout, we can assume the user closed the modal
             return
 
     @slash_command(
@@ -216,7 +215,7 @@ class Reminders(Extension):
                     )
                     await channel.send(embeds=embed)
                     await db.all_reminders.delete_one({"uuid": reminder["uuid"]})
-                except BaseException:  # if channel doesn't exist
+                except BaseException:  # ! if channel doesn't exist
                     try:
                         print("Channel not found\nAttempting to DM the user")
                         channel = await self.bot.fetch_user(reminder["user_id"])

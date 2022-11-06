@@ -1,0 +1,26 @@
+{
+    "guilds": {
+        "943106609897426965": {
+            "github": true,
+            "dehoisting": true,
+            "mod_log_enabled": false,
+            "mod_log_channel": 999588251956412507,
+            "welcome_channel": 891613945356492893,
+            "welcome": "Welcome to the server, {member.mention}!",
+            "welcome_dm_message": "Welcome to the server, {member.name}!",
+            "leave_channel": 891613945356492893,
+            "leave": "Goodbye, {member.name}!"
+        },
+        "891613945356492890": {
+            "github": true,
+            "dehoisting": false,
+            "mod_log_enabled": false,
+            "mod_log_channel": null,
+            "welcome_channel": null,
+            "welcome": "Welcome to the server, {member.mention}!",
+            "welcome_dm_message": "Welcome to the server, {member.name}!",
+            "leave_channel": null,
+            "leave": "Goodbye, {member.name}!"
+        }
+    }
+}

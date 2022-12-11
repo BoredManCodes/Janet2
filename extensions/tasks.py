@@ -11,7 +11,7 @@ class Tasks(Extension):
         self.dehoist.start()
 
     # * Dehoist users by adding invisible characters to the front of their name
-    @Task.create(IntervalTrigger(minutes=10))
+    @Task.create(IntervalTrigger(minutes=30))
     async def dehoist(self):
         # * Get the config from the config.json file
         config = json.load(open("config.json", "r"))

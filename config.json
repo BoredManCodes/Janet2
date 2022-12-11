@@ -12,7 +12,7 @@
             "leave": "Goodbye, {member.name}!"
         },
         "891613945356492890": {
-            "github": true,
+            "github": false,
             "dehoisting": false,
             "mod_log_enabled": false,
             "mod_log_channel": null,
@@ -21,6 +21,28 @@
             "welcome_dm_message": "Welcome to the server, {member.name}!",
             "leave_channel": null,
             "leave": "Goodbye, {member.name}!"
+        },
+        "950158101892464691": {
+            "github": false,
+            "dehoisting": true,
+            "mod_log_enabled": false,
+            "mod_log_channel": null,
+            "welcome_channel": null,
+            "welcome": null,
+            "welcome_dm_message": null,
+            "leave_channel": null,
+            "leave": null
+        },
+        "858547359804555264": {
+            "github": false,
+            "dehoisting": true,
+            "mod_log_enabled": false,
+            "mod_log_channel": null,
+            "welcome_channel": null,
+            "welcome": null,
+            "welcome_dm_message": null,
+            "leave_channel": null,
+            "leave": null
         }
     }
 }

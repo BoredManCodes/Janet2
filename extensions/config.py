@@ -13,7 +13,7 @@ from naff.api.events.internal import Component
 from naff.models.discord import color
 import json
 import asyncio
-
+from pathlib import Path
 
 class Config(Extension):
     print("Config extension loaded")
@@ -28,7 +28,7 @@ class Config(Extension):
     )
     async def config_view(self, ctx: InteractionContext):
         # * Get the config from the config.json file
-        config = json.load(open("config.json", "r+"))
+        config = json.load(open((Path(__file__).parent.parent / "config.json"), "r+"))
         # * get this guild's config options
         try:
             guild_config = config["guilds"][str(ctx.guild.id)]
@@ -47,8 +47,8 @@ class Config(Extension):
                 }
             }
             config["guilds"].update(new_config)
-            json.dump(config, open("config.json", "w"), indent=4)
-            config = json.load(open("config.json", "r+"))
+            json.dump(config, open((Path(__file__).parent.parent / "config.json"), "w"), indent=4)
+            config = json.load(open((Path(__file__).parent.parent / "config.json"), "r+"))
             guild_config = config["guilds"][str(ctx.guild.id)]
             pass
         on_emoji = "<a:on:957172382827708456>"

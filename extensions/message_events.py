@@ -3,6 +3,7 @@ from naff.api.events import MessageCreate
 import re
 import json
 from naff.models.discord import color
+import random
 
 class MessageEvents(Extension):
     print("Message Events extension loaded")
@@ -17,7 +18,7 @@ class MessageEvents(Extension):
                     link = event.message.content.split('/')
                     server_id = int(link[4])
                     channel_id = int(link[5])
-                    msg_id = int(link[6])
+                    msg_id = int(link[6].split(' ')[0])
                     server = event.bot.get_guild(server_id)
                     channel = server.get_channel(channel_id)
                     quoted = await channel.fetch_message(msg_id)
@@ -54,8 +55,15 @@ class MessageEvents(Extension):
                     embed.set_footer(text=f"Quoted by {event.message.author.display_name}", icon_url=event.message.author.avatar._url)
                     embed.color = color.MaterialColors.DEEP_PURPLE
                     if quoted.embeds:
-                        if quoted.embeds[0].author.name is not None:
-                            embed.title = quoted.embeds[0].author.name
+                        try:
+                            if quoted.embeds[0].author.name is not None:
+                                embed.title = quoted.embeds[0].author.name
+                        except AttributeError:
+                            pass
+                    show_reminder = random.randint(0, 10)
+                    if show_reminder == 5:
+                        embed.add_field(name="Reminder:", value="You can click the embed's title to view this message's context")
+
                     await event.message.reply(embed=embed)
 
                     try:

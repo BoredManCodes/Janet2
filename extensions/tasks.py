@@ -1,6 +1,7 @@
 from naff import Task, IntervalTrigger, Extension, listen
 import re
 import json
+from pathlib import Path
 
 class Tasks(Extension):
     print("Tasks extension loaded")
@@ -14,7 +15,7 @@ class Tasks(Extension):
     @Task.create(IntervalTrigger(minutes=30))
     async def dehoist(self):
         # * Get the config from the config.json file
-        config = json.load(open("config.json", "r"))
+        config = json.load(open((Path(__file__).parent.parent / "config.json"), "r"))
         for guild in self.bot.guilds:
             # * get this guild's config options
             try:

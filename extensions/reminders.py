@@ -202,6 +202,7 @@ class Reminders(Extension):
         reminders = await reminders.to_list(length=None)
         for reminder in reminders:
             if now >= reminder["time"]:
+                await db.all_reminders.delete_one({"uuid": reminder["uuid"]})
                 try:
                     if not reminder["dm"]:
                         channel = await self.bot.fetch_channel(reminder["channel_id"])
@@ -214,7 +215,6 @@ class Reminders(Extension):
                         description=f"You asked me to remind you <t:{reminder['time']}:R>\nAbout: {reminder['content']}",
                     )
                     await channel.send(embeds=embed)
-                    await db.all_reminders.delete_one({"uuid": reminder["uuid"]})
                 except BaseException:  # ! if channel doesn't exist
                     try:
                         print("Channel not found\nAttempting to DM the user")
@@ -229,7 +229,6 @@ class Reminders(Extension):
                             description=f"You asked me to remind you <t:{reminder['time']}:R>\nAbout: {reminder['content']}",
                         )
                         await channel.send(embeds=embed)
-                        await db.all_reminders.delete_one({"uuid": reminder["uuid"]})
                     except BaseException as e:
                         print(e)
                         for guild in self.bot.guilds:
@@ -246,19 +245,13 @@ class Reminders(Extension):
                                         description=f"You asked me to remind you <t:{reminder['time']}:R>\nAbout: {reminder['content']}",
                                     )
                                     await guild.system_channel.send(embeds=embed)
-                                    await db.all_reminders.delete_one(
-                                        {"uuid": reminder["uuid"]}
-                                    )
+
                             except NotFound:
                                 continue
                             except AttributeError:
                                 print(
                                     "I'm out of ideas :), I've tried everything to send a reminder but was unable"
                                 )
-                                await db.all_reminders.delete_one(
-                                    {"uuid": reminder["uuid"]}
-                                )
-
                         pass
 
 
